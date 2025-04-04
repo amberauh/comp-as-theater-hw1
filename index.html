@@ -99,7 +99,7 @@
       <div class="advice">"When you forget your phone occasionally, just roll with it. Take your shower without your phone. Once you remember you forgot it and let yourself feel that slight discomfort so you can get used to doing things without your phone."</div>
     </div>
   </div>
-  <audio id="glitchSound" src="glitch.mp3"></audio>
+  <audio id="glitchSound" src="error-126627.mp3"></audio>
   <script>
     function toggleAdvice(card) {
       const advice = card.querySelector('.advice');
@@ -112,6 +112,13 @@
       if (!isVisible) {
         advice.style.display = 'block';
       }
+      
+      // Sound effect
+      const sound = document.getElementById('glitchSound');
+      if (sound) {
+        sound.currentTime = 0;
+        sound.play();
+      }  
 
       // Add glitch effect
       card.classList.add('glitch');
