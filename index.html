@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to fight addiction to technology (according to reddit)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .card {
+      width: 240px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
+
+    .subtitle {
+      font-style: italic;
+      font-size: 0.9em;
+      margin-bottom: 10px;
+      color: #666;
+    }
+
+    .advice {
+      display: none;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    /* Glitch effect keyframes */
+    @keyframes glitch {
+      0% { transform: translate(0, 0); filter: none; }
+      20% { transform: translate(-2px, 2px); filter: blur(1px) contrast(1.2); }
+      40% { transform: translate(2px, -2px); filter: hue-rotate(30deg); }
+      60% { transform: translate(-2px, 2px); filter: blur(0.5px); }
+      80% { transform: translate(2px, -1px); filter: hue-rotate(-30deg); }
+      100% { transform: translate(0, 0); filter: none; }
+    }
+
+    .glitch {
+      animation: glitch 0.4s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <h1>How to Fight Addiction to Technology (According to Reddit)</h1>
+  <div class="grid">
+    <div class="card" onclick="toggleAdvice(this)">
+      <div class="title">🚨 The Educated Answer</div>
+      <div class="advice">"Try reading 'Digital Minimalism' by Cal Newport — just not on your phone."</div>
+    </div>
+    <div class="card" onclick="toggleAdvice(this)">
+      <div class="title">🚨 The Attachment</div>
+      <div class="advice">"My phone is like my first love. Don’t be afraid to know that you don’t need to take part of society, you don’t need to be liked & never be a people pleasure. Nothing wrong with going on your phone!"</div>
+    </div>
+    <div class="card" onclick="toggleAdvice(this)">
+      <div class="title">🚨 The Hate Comment</div>
+      <div class="advice">"Unless you're Amish, locking your phone away isn't the answer. You’ll carry it forever. If anyone you knew was in trouble and your excuse for not answering was purposely ignoring it you're an ass. And if you have to check every time to make sure that's not the case, it's useless."</div>
+    </div>
+    <div class="card" onclick="toggleAdvice(this)">
+      <div class="title">🚨 The Optimization</div>
+      <div class="advice">I use Screen Time on my iPhone. I \"only\" get 45 mins of Reddit and Twitter a day.</div>
+    </div>
+    <div class="card" onclick="toggleAdvice(this)">
+      <div class="title">🚨 The Withdrawal</div>
+      <div class="advice">"When you forget your phone occasionally, just roll with it. Take your shower without your phone. Once you remember you forgot it and let yourself feel that slight discomfort so you can get used to doing things without your phone."</div>
+    </div>
+  </div>
+  <audio id="glitchSound" src="glitch.mp3"></audio>
+  <script>
+    function toggleAdvice(card) {
+      const advice = card.querySelector('.advice');
+      const isVisible = advice.style.display === 'block';
+
+      // Hide all advice elements
+      document.querySelectorAll('.advice').forEach(el => el.style.display = 'none');
+
+      // Show or hide the selected one
+      if (!isVisible) {
+        advice.style.display = 'block';
+      }
+
+      // Add glitch effect
+      card.classList.add('glitch');
+      setTimeout(() => {
+        card.classList.remove('glitch');
+      }, 400);
+    }
+  </script>
+</body>
+</html>
