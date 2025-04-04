@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How to fight addiction to technology (according to reddit)</title>
+  <title>Live Tech Addiction Advice Cloud</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -19,112 +19,90 @@
       text-align: center;
     }
 
-    .grid {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      align-items: center;
+    form {
+      margin-bottom: 30px;
     }
 
-    .card {
-      width: 240px;
-      padding: 20px;
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin-left: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #333;
+      color: white;
       cursor: pointer;
-      transition: transform 0.2s;
-      position: relative;
     }
 
-    .card:hover {
-      transform: scale(1.05);
+    #cloud {
+      margin-top: 20px;
+      max-width: 80vw;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
-    .title {
-      font-weight: bold;
-      margin-bottom: 10px;
-      font-size: 1.1em;
+    .word {
+      margin: 10px;
+      font-family: sans-serif;
+      display: inline-block;
+      animation: fadeIn 0.5s ease-in;
     }
 
-    .subtitle {
-      font-style: italic;
-      font-size: 0.9em;
-      margin-bottom: 10px;
-      color: #666;
-    }
-
-    .advice {
-      display: none;
-      margin-top: 10px;
-      color: #555;
-    }
-
-    /* Glitch effect keyframes */
-    @keyframes glitch {
-      0% { transform: translate(0, 0); filter: none; }
-      20% { transform: translate(-2px, 2px); filter: blur(1px) contrast(1.2); }
-      40% { transform: translate(2px, -2px); filter: hue-rotate(30deg); }
-      60% { transform: translate(-2px, 2px); filter: blur(0.5px); }
-      80% { transform: translate(2px, -1px); filter: hue-rotate(-30deg); }
-      100% { transform: translate(0, 0); filter: none; }
-    }
-
-    .glitch {
-      animation: glitch 0.4s ease-in-out;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
-  <h1>How to Fight Addiction to Technology (According to Reddit)</h1>
-  <div class="grid">
-    <div class="card" onclick="toggleAdvice(this)">
-      <div class="title">🚨 The Educated Answer</div>
-      <div class="advice">"Try reading 'Digital Minimalism' by Cal Newport — just not on your phone."</div>
-    </div>
-    <div class="card" onclick="toggleAdvice(this)">
-      <div class="title">🚨 The Attachment</div>
-      <div class="advice">"My phone is like my first love. Don’t be afraid to know that you don’t need to take part of society, you don’t need to be liked & never be a people pleasure. Nothing wrong with going on your phone!"</div>
-    </div>
-    <div class="card" onclick="toggleAdvice(this)">
-      <div class="title">🚨 The Hate Comment</div>
-      <div class="advice">"Unless you're Amish, locking your phone away isn't the answer. You’ll carry it forever. If anyone you knew was in trouble and your excuse for not answering was purposely ignoring it you're an ass. And if you have to check every time to make sure that's not the case, it's useless."</div>
-    </div>
-    <div class="card" onclick="toggleAdvice(this)">
-      <div class="title">🚨 The Optimization</div>
-      <div class="advice">I use Screen Time on my iPhone. I \"only\" get 45 mins of Reddit and Twitter a day.</div>
-    </div>
-    <div class="card" onclick="toggleAdvice(this)">
-      <div class="title">🚨 The Withdrawal</div>
-      <div class="advice">"When you forget your phone occasionally, just roll with it. Take your shower without your phone. Once you remember you forgot it and let yourself feel that slight discomfort so you can get used to doing things without your phone."</div>
-    </div>
-  </div>
-  <audio id="glitchSound" src="error-126627.mp3"></audio>
+  <h1>How Do You Fight Tech Addiction?</h1>
+  <form id="adviceForm">
+    <input type="text" id="adviceInput" placeholder="Your advice..." required />
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="cloud"></div>
+
   <script>
-    function toggleAdvice(card) {
-      const advice = card.querySelector('.advice');
-      const isVisible = advice.style.display === 'block';
+    const responses = [];
 
-      // Hide all advice elements
-      document.querySelectorAll('.advice').forEach(el => el.style.display = 'none');
-
-      // Show or hide the selected one
-      if (!isVisible) {
-        advice.style.display = 'block';
+    document.getElementById('adviceForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const input = document.getElementById('adviceInput');
+      const advice = input.value.trim();
+      if (advice) {
+        responses.push(advice);
+        input.value = '';
+        displayCloud();
       }
-      
-      // Sound effect
-      const sound = document.getElementById('glitchSound');
-      if (sound) {
-        sound.currentTime = 0;
-        sound.play();
-      }  
+    });
 
-      // Add glitch effect
-      card.classList.add('glitch');
-      setTimeout(() => {
-        card.classList.remove('glitch');
-      }, 400);
+    function displayCloud() {
+      const container = document.getElementById('cloud');
+      container.innerHTML = '';
+      responses.forEach(word => {
+        const el = document.createElement('span');
+        el.className = 'word';
+        el.innerText = word;
+        el.style.fontSize = `${12 + Math.random() * 28}px`;
+        el.style.color = randomColor();
+        el.style.transform = `rotate(${Math.random() * 10 - 5}deg)`;
+        container.appendChild(el);
+      });
+    }
+
+    function randomColor() {
+      const colors = ['#333', '#555', '#0077cc', '#9900cc', '#cc0000', '#009966'];
+      return colors[Math.floor(Math.random() * colors.length)];
     }
   </script>
 </body>
